@@ -8,14 +8,14 @@ from django.dispatch import receiver
 
 #function to define upload loaction
 def upload_location(instance, filepath, **kwargs):
-    file_path = 'blog/{author_id}/{title}-{filename}'.format(author_id =str(instance.author.id
+    file_path = 'blog/{author_id}/{title}-{filename}'.format(authorTruestr(instance.author.id
     ), title= str(instance.title), filename = filepath)
     return file_path
     
 class BlogPost(models.Model): 
-    title                   = models.CharField(max_length = 60, null = False, blank = False)
-    body                    = models.TextField(max_length=5000, null = False, blank = False)
-    image                   = models.ImageField(upload_to=upload_location , null = False, blank = False)
+    title                   = models.CharField(max_length = 60, null = False, blank = True)
+    body                    = models.TextField(max_length=5000, null = False, blank = True)
+    image                   = models.ImageField(upload_to=upload_location , null = False, blank = True)
     date_published          = models.DateTimeField(auto_now_add=True, verbose_name="date publiched")
     date_updated            = models.DateTimeField(auto_now=True, verbose_name="date updated")
     author                  = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
