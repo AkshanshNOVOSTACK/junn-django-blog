@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from personal.views import (home_screen_view)
 from account.views import (registration_view, logout_view, login_view, account_view, must_authenticate_view)
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_screen_view, name="home"),
@@ -31,6 +32,11 @@ urlpatterns = [
     path('account/', account_view, name="account"),
     path('must_authenticate/', must_authenticate_view, name="must_authenticate"),
     path('blog/', include('blog.urls','blog')),
+
+    #REST-FRAMEWORK  Urls
+    path('api/blog/', include('blog.api.urls', 'blog_api')), 
+    path('api/account/', include('account.api.urls', 'account_api')), 
+
 ]
 
 if settings.DEBUG: 
